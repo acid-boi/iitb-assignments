@@ -2,7 +2,10 @@
 # password_manager.sh
 
 PASSFILE="/var/secure_passwords.txt"
-
+if [ -d $PASSFILE ]; then
+    echo "Please go through the readme file and create a secure file as mentioned!"
+    exit
+fi
 add_password() {
     read -p "Enter service name: " service
     read -sp "Enter password: " password

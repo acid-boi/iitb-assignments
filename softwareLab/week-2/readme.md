@@ -1,6 +1,6 @@
 # Bash Networking and Automation Scripts
 
----
+## Open it here for a proper formatting and readability![https://github.com/acid-boi/iitb-assignments/tree/main/softwareLab/week-2]
 
 ## 1. Port Scanner
 
@@ -77,7 +77,6 @@ Such scripts are useful in environments where tools like `nmap` are not availabl
    ```
 
    Before scanning ports, the script checks if the host responds to a ping request. This ensures that scanning is only attempted if the host appears reachable.
-   _Note: Some servers disable ICMP (ping) responses. In such cases, the host may still be up even if this check fails._
 
 3. **Port Scanning Logic**
 
@@ -243,6 +242,8 @@ curl -s -X POST "https://api.telegram.org/bot$botAPI/sendMessage" \
 ### Demonstration
 
 A working demonstration of this script has been recorded and is available in the repository as a GIF:
+Please note that since providing the API keys wasn't viable, I have provided a working demo video, if
+needed, i can present it during the viva.
 
 ![Weather Bot Demo](output.gif)
 
@@ -266,13 +267,13 @@ This is useful in environments where the `traceroute` command may not be availab
 ### Usage
 
 ```bash
-./softwarelab3.sh <target>
+./traceroute.sh <target-ip or name>
 ```
 
 Example:
 
 ```bash
-./softwarelab3.sh google.com
+./traceroute.sh google.com
 ```
 
 ### Important Sections of the Code
@@ -281,7 +282,7 @@ Example:
 
 ```bash
 if [ $# -lt 1 ]; then
-    echo "Usage ./softwarelab3.sh <target>"
+    echo "Usage ./traceroute.sh <target>"
     exit 1
 fi
 ```

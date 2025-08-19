@@ -1,6 +1,9 @@
 #!/bin/bash
+#In absence of the traceroute binary, this script can be used to trace the route
+#that a packet is taking to reach a destination host.
+
 if [ $# -lt 1 ]; then
-    echo "Usage ./softwarelab3.sh <target>"
+    echo "Usage ./traceroute.sh <target-ip>"
     exit 1
 fi
 
