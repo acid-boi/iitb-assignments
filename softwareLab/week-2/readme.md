@@ -409,3 +409,8 @@ Use strict file permissions to ensure only the script owner can access the passw
 sudo chmod 600 /var/secure_passwords.txt
 sudo chown <your-username> /var/secure_passwords.txt
 ```
+
+---
+
+Please note that a part of this readme file is AI generated in order to aid better visibility and presentability and I don't claim any credit for creating this readme file,
+However, all the scripts are my own intellectual property and I claim full responsibility for the same.
