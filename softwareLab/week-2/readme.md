@@ -257,6 +257,8 @@ This script is a simplified implementation of the classic `traceroute` command. 
 
 This is useful in environments where the `traceroute` command may not be available or installed, yet you still want to analyze the path taken to reach a network destination.
 
+Please note that due to some firewall implementations, in iitb network this script is facing issues, but working fine on other connections. I have attached working proof for the same.
+
 ### Key Features
 
 - Accepts a target IP address or hostname as input.
@@ -275,6 +277,8 @@ Example:
 ```bash
 ./traceroute.sh google.com
 ```
+
+![Traceroute Demo](./output2.gif)
 
 ### Important Sections of the Code
 
