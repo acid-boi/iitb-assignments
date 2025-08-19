@@ -22,7 +22,7 @@ scan() {
     status=$?
 
     if [ $status -ne 0 ]; then
-        echo "The host is not reachable! Please provide another host"
+        echo "The host is not reachable!"
     fi
 
     for i in $(seq $(($2 - 1)) $3); do

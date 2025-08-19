@@ -120,7 +120,7 @@ Port 22 is open for the host 192.168.1.10
 Port 80 is open for the host 192.168.1.10
 ```
 
----
+## ![Demo Scanner](output3.gif)
 
 ## 2. Weather Notification via Telegram Bot
 
@@ -358,8 +358,8 @@ This script provides a **password management system** using a simple text file a
 Use strict file permissions to ensure only the script owner can access the password file:
 
 ```bash
+sudo touch /var/secure_passwords.txt
 sudo chmod 600 /var/secure_passwords.txt
-sudo chown <your-username> /var/secure_passwords.txt
 ```
 
 ---
