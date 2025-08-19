@@ -1,7 +1,5 @@
 # Bash Networking and Automation Scripts
 
-This repository contains a collection of Bash scripts written as part of a college assignment. Each script demonstrates practical use cases of Bash for networking, automation, and system tasks.
-
 ---
 
 ## 1. Port Scanner
@@ -122,124 +120,6 @@ Trying to enumerate the ip 192.168.1.10
 Port 22 is open for the host 192.168.1.10
 Port 80 is open for the host 192.168.1.10
 ```
-
----
-
-## 2. Weather Notification via Telegram Bot
-
-### Overview
-
-This script integrates with **WeatherAPI** to fetch weather forecasts and uses the **Telegram Bot API** to send weather updates as messages. The purpose is to receive daily weather alerts, such as rainfall warnings, before leaving for class.
-
-The script is intended to be scheduled as a **cron job**, ensuring that notifications are received automatically every morning without manual execution.
-
----
-
-### Dependencies
-
-- **curl** (for making HTTP requests).
-- **jq** (for parsing JSON responses).
-- A registered account and API key from [WeatherAPI](https://www.weatherapi.com/).
-- A Telegram bot created via [BotFather](https://core.telegram.org/bots#botfather) with its API token.
-
----
-
-### Usage
-
-1. Export your API keys in your `~/.bashrc` file:
-
-   ```bash
-   export weatherAPI="<your-weatherapi-key>"
-   export botAPI="<your-telegram-bot-token>"
-   ```
-
-   Reload the file with:
-
-   ```bash
-   source ~/.bashrc
-   ```
-
-2. Run the script:
-
-   ```bash
-   ./weather.sh
-   ```
-
-3. Example cron job entry (daily at 7:30 AM):
-
-   ```bash
-   30 7 * * * /path/to/weather.sh
-   ```
-
----
-
-### Working of the Script
-
-1. **API Request and Response Handling**
-
-   ```bash
-   status=$(curl -s -w "%{http_code}" "https://api.weatherapi.com/v1/forecast.json?key=$weatherAPI&q=Mumbai&days=1&aqi=no&alerts=yes" -o $filename)
-   ```
-
-   - The script makes a request to WeatherAPI and stores the output in a temporary JSON file.
-   - It also captures the HTTP status code to verify if the request was successful.
-
-2. **Extracting Data with jq**
-
-   ```bash
-   max_temp=$(cat $filename | jq .forecast.forecastday[0].day.maxtemp_c)
-   min_temp=$(cat $filename | jq .forecast.forecastday[0].day.mintemp_c)
-   avghumidity=$(cat $filename | jq .forecast.forecastday[0].day.avghumidity)
-   dailywillitrain=$(cat $filename | jq .forecast.forecastday[0].day.daily_will_it_rain)
-   dailychanceofrain=$(cat $filename | jq .forecast.forecastday[0].day.daily_chance_of_rain)
-   conditionText=$(cat $filename | jq .forecast.forecastday[0].day.condition.text)
-   ```
-
-   - The script extracts useful weather details such as temperature, humidity, rainfall chances, and forecast conditions using `jq`.
-
-3. **Message Crafting**
-
-   ```bash
-   if [ $dailywillitrain -eq 1 ]; then
-       message="RAINFALL ALERT!"
-   fi
-   message+=$'\nMaximum Temperature: '"$max_temp"
-   message+=$'\nMinimum Temperature: '"$min_temp"
-   message+=$'\nAverage Humidity: '"$avghumidity"
-   message+=$'\nCan it Rain: '"$dailywillitrain"
-   message+=$'\nChances of Rain: '"$dailychanceofrain"
-   message+=$'\nForecast: '"$conditionText"
-   ```
-
-   - A formatted message is created containing all weather details.
-   - A rainfall alert is added if rain is predicted.
-
-4. **Telegram Notification**
-
-   ```bash
-   curl -s -X POST "https://api.telegram.org/bot$botAPI/sendMessage" \
-       --data-urlencode "text=$message" \
-       -d chat_id="$chatId" >/dev/null 2>&1
-   ```
-
-   - The crafted message is sent to the specified Telegram chat ID.
-   - This provides a real-time weather notification directly in the Telegram app.
-
-5. **Cleanup**
-
-   ```bash
-   rm $filename
-   ```
-
-   - The temporary JSON file is deleted after the data is processed.
-
----
-
-### Demonstration
-
-A working demonstration of this script has been recorded and is available in the repository as a GIF:
-
-![Weather Bot Demo](demo/weather-bot.gif)
 
 ---
 
@@ -451,7 +331,7 @@ Reached destination in 4 hops.
 
 ## Password Manager Script
 
-This script provides a **lightweight password management system** using a simple text file as the storage backend. It enables saving, listing, and retrieving passwords for different services, with options to copy them securely to the clipboard or export them as environment variables.
+This script provides a **password management system** using a simple text file as the storage backend. It enables saving, listing, and retrieving passwords for different services, with options to copy them securely to the clipboard or export them as environment variables.
 
 ---
 
@@ -528,11 +408,6 @@ echo export "$service""_PASSWORD"="$password" >>~/.bashrc
 This appends an export statement to `~/.bashrc`, making the password accessible via `$SERVICENAME_PASSWORD` after sourcing.
 
 ---
-
-### Security Note
-
-- This script is meant for **educational purposes**. Storing passwords in plain text (even with restricted file access) is **not recommended for production systems**. A more secure approach would involve encryption or use of a dedicated password manager (e.g., `pass`, `gopass`, or external secret stores).
-- Use strict file permissions to ensure only the script owner can access the password file:
 
 ```bash
 sudo chmod 600 /var/secure_passwords.txt
