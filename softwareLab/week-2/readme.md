@@ -1,6 +1,6 @@
 # Bash Networking and Automation Scripts
 
-## Open it here for a proper formatting and readability![https://github.com/acid-boi/iitb-assignments/tree/main/softwareLab/week-2]
+## [Open it here for a proper formatting and readability!](https://github.com/acid-boi/iitb-assignments/tree/main/softwareLab/week-2)
 
 ## 1. Port Scanner
 
