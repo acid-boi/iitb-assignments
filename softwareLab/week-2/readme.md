@@ -321,12 +321,6 @@ else
 Reached destination in 4 hops.
 ```
 
-### Limitations
-
-- Requires `ping` to be installed and available on the system.
-- May not show hostnames for routers if reverse DNS is disabled.
-- Maximum hop count is fixed to 20 (can be modified by changing `max_hops`).
-
 ---
 
 ## Password Manager Script
@@ -352,8 +346,7 @@ This script provides a **password management system** using a simple text file a
 - **File Storage Location**: The script stores passwords in `/var/secure_passwords.txt`. The file requires **sudo privileges** for writing and reading.
 - **Clipboard Tools**:
 
-  - On Linux: `xclip`
-  - On macOS: `pbcopy`
+  - `xclip`
 
 - **Permissions**: Since this involves sensitive data, only privileged users should have access to the password file.
 
@@ -408,6 +401,8 @@ echo export "$service""_PASSWORD"="$password" >>~/.bashrc
 This appends an export statement to `~/.bashrc`, making the password accessible via `$SERVICENAME_PASSWORD` after sourcing.
 
 ---
+
+Use strict file permissions to ensure only the script owner can access the password file:
 
 ```bash
 sudo chmod 600 /var/secure_passwords.txt
