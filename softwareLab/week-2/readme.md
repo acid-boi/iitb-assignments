@@ -355,6 +355,15 @@ This script provides a **password management system** using a simple text file a
 
 - **Permissions**: Since this involves sensitive data, only privileged users should have access to the password file.
 
+Use strict file permissions to ensure only the script owner can access the password file:
+
+```bash
+sudo chmod 600 /var/secure_passwords.txt
+sudo chown <your-username> /var/secure_passwords.txt
+```
+
+---
+
 ---
 
 ### Usage
@@ -404,15 +413,6 @@ echo export "$service""_PASSWORD"="$password" >>~/.bashrc
 ```
 
 This appends an export statement to `~/.bashrc`, making the password accessible via `$SERVICENAME_PASSWORD` after sourcing.
-
----
-
-Use strict file permissions to ensure only the script owner can access the password file:
-
-```bash
-sudo chmod 600 /var/secure_passwords.txt
-sudo chown <your-username> /var/secure_passwords.txt
-```
 
 ---
 

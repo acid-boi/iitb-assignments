@@ -2,7 +2,7 @@
 # password_manager.sh
 
 PASSFILE="/var/secure_passwords.txt"
-if [ -d $PASSFILE ]; then
+if [ ! -e $PASSFILE ]; then
     echo "Please go through the readme file and create a secure file as mentioned!"
     exit
 fi
